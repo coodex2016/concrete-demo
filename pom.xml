@@ -11,6 +11,7 @@
     <modules>
         <module>demo/api</module>
         <module>demo/impl</module>
+        <module>demo/release</module>
     </modules>
 
     <properties>
