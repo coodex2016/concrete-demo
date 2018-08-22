@@ -11,5 +11,9 @@ public class XGen {
 
         API.generateFor("demo.doc",
                 DemoService.class.getPackage().getName());
+
+        //生成jQuery调用服务的代码
+        API.generateFor("demo.jquery",
+                DemoService.class.getPackage().getName());
     }
 }

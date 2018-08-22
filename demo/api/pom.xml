@@ -13,13 +13,11 @@
     <artifactId>demo-api</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>org.coodex</groupId>
             <artifactId>concrete-api</artifactId>
             <scope>provided</scope>
         </dependency>
-
     </dependencies>
 
 

@@ -9,6 +9,7 @@ import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -16,7 +17,7 @@ import org.springframework.context.annotation.Import;
 @SpringBootApplication(scanBasePackages = "org.coodex.concrete.demo.impl")
 @Configuration
 @Import(ConcreteSpringConfiguration.class)
-public class DemoBoot {
+public class DemoBoot extends SpringBootServletInitializer {
 
     /**
      * 运行 spring boot
