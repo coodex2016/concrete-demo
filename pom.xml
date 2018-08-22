@@ -12,6 +12,8 @@
         <module>demo/api</module>
         <module>demo/impl</module>
         <module>demo/release</module>
+        <module>api-helper</module>
+        <module>demo/client-invoker</module>
     </modules>
 
     <properties>

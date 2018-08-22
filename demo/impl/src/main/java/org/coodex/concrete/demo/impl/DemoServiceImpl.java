@@ -1,6 +1,7 @@
 package org.coodex.concrete.demo.impl;
 
 import org.coodex.concrete.demo.api.DemoService;
+import org.coodex.concrete.demo.api.pojo.VehiclePlate;
 
 import javax.inject.Named;
 
@@ -14,5 +15,10 @@ public class DemoServiceImpl implements DemoService {
     @Override
     public String sayHello(String name) {
         return String.format("Hello %s!", name);
+    }
+
+    @Override
+    public VehiclePlate randomPlate() {
+        return null;
     }
 }

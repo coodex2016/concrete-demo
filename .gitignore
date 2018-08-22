@@ -3,3 +3,6 @@
 
 **/resources/localEnv.properties
 
+**/resources/api_gen.properties
+
+**/resources/api_gen.*.properties
