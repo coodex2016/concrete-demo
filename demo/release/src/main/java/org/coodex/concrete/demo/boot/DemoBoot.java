@@ -1,6 +1,7 @@
 package org.coodex.concrete.demo.boot;
 
 import org.coodex.concrete.demo.api.DemoService;
+import org.coodex.concrete.demo.api.GirlService;
 import org.coodex.concrete.spring.ConcreteSpringConfiguration;
 import org.coodex.concrete.support.jsr339.ConcreteJSR339Application;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -57,9 +58,10 @@ public class DemoBoot extends SpringBootServletInitializer {
         public JaxRSApplication() {
             register(
                     // 使用 jackson 作为 jaxrs的序列化和反序列化实现
-                    JacksonFeature.class,
-                    // 注册 我们写的api
-                    DemoService.class);
+                    JacksonFeature.class);
+
+            // 按照包名约定注册服务
+            registerPackage(DemoService.class.getPackage().getName());
         }
     }
 }

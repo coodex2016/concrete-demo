@@ -232,7 +232,9 @@
         modules[moduleName][packageName] = module;
     };
 
-    register("DemoService", "org.coodex.concrete.demo.api", { "add": function (x1, x2) {return invoke({"path": "/OrgCoodexConcreteDemoApiDemoService/add/{x1}/{x2}","param": {"x1": x1, "x2": x2},"method": "GET", "dataType": "json" });}, "sayHello": function (name) {return invoke({"path": "/OrgCoodexConcreteDemoApiDemoService/sayHello/{name}","param": {"name": name},"method": "GET", "dataType": "text" });}, "randomPlate": function () {return invoke({"path": "/OrgCoodexConcreteDemoApiDemoService/randomPlate","param": {},"method": "GET", "dataType": "json" });}});
+    register("DemoService", "org.coodex.concrete.demo.api", { "add": function (x1, x2) {return invoke({"path": "/I/Love/Concrete/andTeachMe/How/Much/is/{x1}/plus/{x2}/plz","param": {"x1": x1, "x2": x2},"method": "GET", "dataType": "json" });}, "sayHello": function (name) {return invoke({"path": "/I/Love/Concrete/sayHello/{name}","param": {"name": name},"method": "GET", "dataType": "text" });}, "randomPlate": function () {return invoke({"path": "/I/Love/Concrete/randomPlate","param": {},"method": "GET", "dataType": "json" });}});
+
+    register("GirlService", "org.coodex.concrete.demo.api", { "updateGirlInfo": function (name, girl) {return invoke({"path": "/Girls/{name}","param": {"name": name, "girl": girl},"method": "PUT", "dataType": "json" });}, "getStars": function (name) {return invoke({"path": "/Girls/{name}/stars","param": {"name": name},"method": "GET", "dataType": "json" });}, "get": overload("get", {"0": function () {return invoke({"path": "/Girls","param": {},"method": "GET", "dataType": "json" });}, "1": function (name) {return invoke({"path": "/Girls/{name}","param": {"name": name},"method": "GET", "dataType": "json" });}}), "saveGirl": function (girl) {return invoke({"path": "/Girls","param": {"girl": girl},"method": "POST", "dataType": "json" });}, "deleteByName": function (name) {return invoke({"path": "/Girls/{name}","param": {"name": name},"method": "DELETE", "dataType": "json" });}});
 
     if(self){
         self.concrete = concrete;
