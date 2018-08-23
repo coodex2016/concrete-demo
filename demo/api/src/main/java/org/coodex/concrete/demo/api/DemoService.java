@@ -4,6 +4,7 @@ import org.coodex.concrete.api.ConcreteService;
 import org.coodex.concrete.api.Description;
 import org.coodex.concrete.api.MicroService;
 import org.coodex.concrete.demo.api.pojo.VehiclePlate;
+import org.coodex.concrete.jaxrs.Body;
 import org.coodex.util.Parameter;
 
 @Description(
@@ -19,10 +20,15 @@ public interface DemoService extends ConcreteService {
             description = "不多说，都会"
     )
     // step 3.0: 定义接口名
-    @MicroService("andTeachMe/How/Much/is/{x1}/plus/{x2}/plz")
+    // step 3.0.1: 演示参数组合
+    // @MicroService("andTeachMe/How/Much/is/{x1}/plus/{x2}/plz")
     int add(
+            //step 3.0.1:参数组合
+            @Body
             @Description(name = "被加数")
             @Parameter("x1") int x1,
+            //step 3.0.1:参数组合
+            @Body
             @Description(name = "加数")
             @Parameter("x2") int x2);
 
@@ -30,6 +36,8 @@ public interface DemoService extends ConcreteService {
             name = "就是个示意，编不出来了 :("
     )
     String sayHello(
+            // step 3.0.1: post数据
+            @Body
             @Description(name = "要say hello的名字")
             @Parameter("name") String name);
 

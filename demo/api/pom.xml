@@ -18,6 +18,12 @@
             <artifactId>concrete-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.coodex</groupId>
+            <artifactId>concrete-jaxrs</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 
