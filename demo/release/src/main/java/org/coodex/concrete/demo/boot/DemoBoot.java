@@ -1,5 +1,10 @@
 package org.coodex.concrete.demo.boot;
 
+import org.coodex.concrete.accounts.simple.api.Login;
+import org.coodex.concrete.accounts.simple.impl.SimpleAccountFactory;
+import org.coodex.concrete.accounts.simple.impl.SimpleAccountLoginImpl;
+import org.coodex.concrete.common.AccountFactory;
+import org.coodex.concrete.core.intercept.RBACInterceptor;
 import org.coodex.concrete.demo.api.DemoService;
 import org.coodex.concrete.demo.api.GirlService;
 import org.coodex.concrete.spring.ConcreteSpringConfiguration;
@@ -30,6 +35,14 @@ public class DemoBoot extends SpringBootServletInitializer {
     }
 
     /**
+     * 注册RBAC的拦截器
+     * @return
+     */
+    @Bean
+    public RBACInterceptor rbacInterceptor(){
+        return new RBACInterceptor();
+    }
+    /**
      * 定义一个jaxrsServlet
      *
      * @return
@@ -51,6 +64,25 @@ public class DemoBoot extends SpringBootServletInitializer {
         return registrationBean;
     }
 
+
+    /**
+     * step 3.1 注册简单账户工厂
+     * @return
+     */
+    @Bean
+    public AccountFactory accountFactory(){
+        return new SimpleAccountFactory();
+    }
+
+    /**
+     * step 3.1 注册简单账户的登录服务实现
+     * @return
+     */
+    @Bean
+    public Login login(){
+        return new SimpleAccountLoginImpl();
+    }
+
     /**
      * jsr339(jaxrs 2.0)规范的Application
      */
@@ -58,7 +90,9 @@ public class DemoBoot extends SpringBootServletInitializer {
         public JaxRSApplication() {
             register(
                     // 使用 jackson 作为 jaxrs的序列化和反序列化实现
-                    JacksonFeature.class);
+                    JacksonFeature.class,
+                    // step 3.1 简单账户登录服务
+                    Login.class);
 
             // 按照包名约定注册服务
             registerPackage(DemoService.class.getPackage().getName());

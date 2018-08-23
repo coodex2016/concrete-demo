@@ -40,6 +40,11 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.coodex</groupId>
+            <artifactId>concrete-accounts-simple-impl</artifactId>
+        </dependency>
+
     </dependencies>
 
 
