@@ -5,8 +5,8 @@ import org.coodex.concrete.accounts.simple.impl.SimpleAccountFactory;
 import org.coodex.concrete.accounts.simple.impl.SimpleAccountLoginImpl;
 import org.coodex.concrete.common.AccountFactory;
 import org.coodex.concrete.core.intercept.RBACInterceptor;
+import org.coodex.concrete.core.intercept.SignatureInterceptor;
 import org.coodex.concrete.demo.api.DemoService;
-import org.coodex.concrete.demo.api.GirlService;
 import org.coodex.concrete.spring.ConcreteSpringConfiguration;
 import org.coodex.concrete.support.jsr339.ConcreteJSR339Application;
 import org.glassfish.jersey.jackson.JacksonFeature;
@@ -34,14 +34,21 @@ public class DemoBoot extends SpringBootServletInitializer {
         SpringApplication.run(DemoBoot.class, args);
     }
 
+    @Bean
+    public SignatureInterceptor signatureInterceptor(){
+        return new SignatureInterceptor();
+    }
+
     /**
      * 注册RBAC的拦截器
+     *
      * @return
      */
     @Bean
-    public RBACInterceptor rbacInterceptor(){
+    public RBACInterceptor rbacInterceptor() {
         return new RBACInterceptor();
     }
+
     /**
      * 定义一个jaxrsServlet
      *
@@ -67,19 +74,21 @@ public class DemoBoot extends SpringBootServletInitializer {
 
     /**
      * step 3.1 注册简单账户工厂
+     *
      * @return
      */
     @Bean
-    public AccountFactory accountFactory(){
+    public AccountFactory accountFactory() {
         return new SimpleAccountFactory();
     }
 
     /**
      * step 3.1 注册简单账户的登录服务实现
+     *
      * @return
      */
     @Bean
-    public Login login(){
+    public Login login() {
         return new SimpleAccountLoginImpl();
     }
 
