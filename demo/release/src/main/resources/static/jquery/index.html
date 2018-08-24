@@ -19,17 +19,26 @@
                     alert("4 + 5 = " + sum);
                 })
             });
+            // step 3.4
+            $('#add145').click(function () {
+                exampleModule.add(14, 5).then(function (sum) {
+                    alert("14 + 5 = " + sum);
+                })
+            });
 
             $('#sayHello').click(function () {
                 exampleModule.sayHello('jQuery').then(function (value) {
                     alert(value);
                 })
-            })
+            });
+
         });
     </script>
 </head>
 <body>
 <button id="add45">add(4, 5)</button>
+<!-- step 3.4 -->
+<button id="add145">add(14, 5)</button>
 <button id="sayHello">sayHello('jQuery')</button>
 </body>
 </html>

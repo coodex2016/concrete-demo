@@ -15,8 +15,6 @@ public interface DemoService extends ConcreteService {
             name = "求两数之和",
             description = "不多说，都会"
     )
-    // step 3.1
-    @AccessAllow
     int add(
             @Description(name = "被加数")
             @Parameter("x1") int x1,
