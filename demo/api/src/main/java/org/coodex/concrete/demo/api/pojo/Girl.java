@@ -4,7 +4,9 @@ import org.coodex.concrete.api.mockers.Name;
 import org.coodex.concrete.demo.WeightMock;
 import org.coodex.pojomocker.annotations.INTEGER;
 
-public class Girl {
+import java.io.Serializable;
+
+public class Girl implements Serializable {
 
     private String name;
     private Integer height;
