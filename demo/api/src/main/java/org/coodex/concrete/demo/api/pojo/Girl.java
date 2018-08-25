@@ -1,5 +1,9 @@
 package org.coodex.concrete.demo.api.pojo;
 
+import org.coodex.concrete.api.mockers.Name;
+import org.coodex.concrete.demo.WeightMock;
+import org.coodex.pojomocker.annotations.INTEGER;
+
 public class Girl {
 
     private String name;
@@ -15,6 +19,7 @@ public class Girl {
         this.name = name;
     }
 
+    @Name //随机姓名
     public String getName() {
         return name;
     }
@@ -23,6 +28,7 @@ public class Girl {
         this.name = name;
     }
 
+    @INTEGER(min = 0, max = 100)
     public Integer getStars() {
         return stars;
     }
@@ -31,6 +37,7 @@ public class Girl {
         this.stars = stars;
     }
 
+    @INTEGER(min = 150, max= 170)
     public Integer getHeight() {
         return height;
     }
@@ -39,6 +46,7 @@ public class Girl {
         this.height = height;
     }
 
+    @WeightMock // 新建的Mock
     public Integer getWeight() {
         return weight;
     }
@@ -47,6 +55,7 @@ public class Girl {
         this.weight = weight;
     }
 
+    @INTEGER(min = 18, max = 36)
     public Integer getAge() {
         return age;
     }

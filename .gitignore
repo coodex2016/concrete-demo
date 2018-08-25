@@ -6,3 +6,5 @@
 **/resources/api_gen.properties
 
 **/resources/api_gen.*.properties
+
+**/resources/moduleMock.properties

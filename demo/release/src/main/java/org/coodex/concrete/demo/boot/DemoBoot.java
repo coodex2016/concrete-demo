@@ -31,6 +31,8 @@ public class DemoBoot extends SpringBootServletInitializer {
      * @param args
      */
     public static void main(String[] args) {
+        // step 3.5
+        System.setProperty("org.coodex.concrete.jaxrs.devMode", "true");
         SpringApplication.run(DemoBoot.class, args);
     }
 
