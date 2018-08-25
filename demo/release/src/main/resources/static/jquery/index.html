@@ -9,10 +9,18 @@
         $(document).ready(function () {
             // 设置服务根
             concrete.configure({
-                root: '/jaxrs'
+                root: '/jaxrs',
+                onBroadcast: function (msgId, host, subject, data) {
+
+                    // 3.7.1
+                    var el = '<div>' + subject + ': '+data.arrived + ' ' + data.girl.name +'</div>';
+                    console.log(el);
+                    $('#content').append($(el));
+                }
             });
 
             var exampleModule = concrete.module("DemoService");
+            var girlService = concrete.module("GirlService");
 
             $('#add45').click(function () {
                 exampleModule.add(4, 5).then(function (sum) {
@@ -32,6 +40,12 @@
                 })
             });
 
+            $('#subscribe').click(function () {
+                girlService.subscribe().then(function (value) {
+                    concrete.polling();
+                });
+            })
+
         });
     </script>
 </head>
@@ -40,5 +54,10 @@
 <!-- step 3.4 -->
 <button id="add145">add(14, 5)</button>
 <button id="sayHello">sayHello('jQuery')</button>
+
+<button id="subscribe">subscribe</button>
+
+<div id="content"></div>
+
 </body>
 </html>

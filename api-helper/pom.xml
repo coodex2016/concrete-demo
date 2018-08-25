@@ -24,6 +24,11 @@
             <version>${project.parent.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.coodex</groupId>
+            <artifactId>concrete-jaxrs</artifactId>
+        </dependency>
+
 
     </dependencies>
 

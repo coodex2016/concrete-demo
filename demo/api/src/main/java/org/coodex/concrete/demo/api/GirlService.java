@@ -14,6 +14,9 @@ public interface GirlService extends ConcreteService {
 
     Girl get(@Parameter("name") String name);
 
+    // step 3.7.1
+    void subscribe();
+
     @MicroService
     void saveGirl(@Parameter("girl") Girl girl);
 
