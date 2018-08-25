@@ -53,28 +53,11 @@ public class GirlServiceImpl implements GirlService {
         return IF.isNull(girlsMap.get(name), "Girl not found");
     }
 
-    private static final String key_all_girls = "all girl message subscribed";
 
-    private boolean isSubscribed(){
-        Boolean b = token.getAttribute(key_all_girls, Boolean.class);
-        return b != null && b;
-    }
     @Override
     public void subscribe() {
-        if(!isSubscribed()) {
-            synchronized (this) {
-                if(!isSubscribed()) {
-                    token.setAttribute(key_all_girls, Boolean.valueOf(true));
-
-                    newGirlComing.subscribe(new MessageFilter<NewGirlComing>() {
-                        @Override
-                        public boolean handle(NewGirlComing message) {
-                            return true;
-                        }
-                    });
-                }
-            }
-        }
+        // 3.7.2
+        token.setAttribute("a", "a");
     }
 
     @Override
