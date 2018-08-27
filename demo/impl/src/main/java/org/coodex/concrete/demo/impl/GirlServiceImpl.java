@@ -85,7 +85,7 @@ public class GirlServiceImpl implements GirlService {
             }
         }, 5, TimeUnit.SECONDS);
 
-        // step 3.9
+        // step 3.8
         List<Runnable> runnables = new ArrayList<Runnable>();
         for(int i = 0; i < 10; i ++){
             final int finalI = i;
@@ -109,7 +109,7 @@ public class GirlServiceImpl implements GirlService {
             girlGoneTopic.publish(girl);
         }
 
-        // step 3.9
+        // step 3.8
         // 串行示例
         demoService.add(6,6);
 
