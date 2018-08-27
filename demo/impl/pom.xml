@@ -61,6 +61,11 @@
             <artifactId>concrete-core</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.coodex</groupId>
+            <artifactId>concrete-client</artifactId>
+        </dependency>
+
     </dependencies>
 
 

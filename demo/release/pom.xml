@@ -45,6 +45,21 @@
             <artifactId>concrete-accounts-simple-impl</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.coodex</groupId>
+            <artifactId>concrete-apm-zipkin</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.coodex</groupId>
+            <artifactId>concrete-jaxrs-client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
     </dependencies>
 
 

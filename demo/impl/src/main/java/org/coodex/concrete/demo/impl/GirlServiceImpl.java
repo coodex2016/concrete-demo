@@ -1,7 +1,10 @@
 package org.coodex.concrete.demo.impl;
 
+import org.coodex.concrete.ConcreteClient;
+import org.coodex.concrete.apm.APM;
 import org.coodex.concrete.common.IF;
 import org.coodex.concrete.common.Token;
+import org.coodex.concrete.demo.api.DemoService;
 import org.coodex.concrete.demo.api.GirlService;
 import org.coodex.concrete.demo.api.pojo.Girl;
 import org.coodex.concrete.demo.api.pojo.NewGirlComing;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +29,8 @@ public class GirlServiceImpl implements GirlService {
 
     private final ScheduledExecutorService scheduledExecutorService =
             ExecutorsHelper.newSingleThreadScheduledExecutor();
+
+    private final ExecutorService executorService = ExecutorsHelper.newFixedThreadPool(5);
     @Inject
     @Queue("girlComing")
     private Topic<Girl> girlComingTopic;
@@ -39,6 +45,10 @@ public class GirlServiceImpl implements GirlService {
     @Inject
     private GirlCopier girlCopier;
 
+    @Inject
+    @ConcreteClient("demoClient")
+    private DemoService demoService;
+
     private Map<String, Girl> girlsMap = new HashMap<String, Girl>();
 
     @Override
@@ -50,6 +60,7 @@ public class GirlServiceImpl implements GirlService {
     public Girl get(String name) {
         return IF.isNull(girlsMap.get(name), "Girl not found");
     }
+
 
 
     @Override
@@ -74,6 +85,19 @@ public class GirlServiceImpl implements GirlService {
             }
         }, 5, TimeUnit.SECONDS);
 
+        // step 3.9
+        List<Runnable> runnables = new ArrayList<Runnable>();
+        for(int i = 0; i < 10; i ++){
+            final int finalI = i;
+            runnables.add(new Runnable() {
+                @Override
+                public void run() {
+                    demoService.add(finalI,finalI);
+                }
+            });
+        }
+
+        APM.parallel(executorService, runnables.toArray(new Runnable[0]));
     }
 
     @Override
@@ -84,6 +108,22 @@ public class GirlServiceImpl implements GirlService {
             girlsMap.remove(name);
             girlGoneTopic.publish(girl);
         }
+
+        // step 3.9
+        // 串行示例
+        demoService.add(6,6);
+
+        List<Runnable> runnables = new ArrayList<Runnable>();
+        for(int i = 0; i < 5; i ++){
+            final int finalI = i;
+            runnables.add(new Runnable() {
+                @Override
+                public void run() {
+                    demoService.add(finalI,finalI);
+                }
+            });
+        }
+        APM.parallel(executorService, runnables.toArray(new Runnable[0]));
     }
 
     @Override
