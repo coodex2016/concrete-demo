@@ -1,13 +1,14 @@
 package org.coodex.concrete.demo.impl;
 
-import org.coodex.concrete.common.ConcreteHelper;
 import org.coodex.concrete.common.IF;
 import org.coodex.concrete.common.Token;
 import org.coodex.concrete.demo.api.GirlService;
 import org.coodex.concrete.demo.api.pojo.Girl;
 import org.coodex.concrete.demo.api.pojo.NewGirlComing;
 import org.coodex.concrete.demo.impl.copier.GirlCopier;
-import org.coodex.concrete.message.*;
+import org.coodex.concrete.message.Queue;
+import org.coodex.concrete.message.TokenBasedTopic;
+import org.coodex.concrete.message.Topic;
 import org.coodex.concurrent.ExecutorsHelper;
 
 import javax.inject.Inject;
@@ -22,22 +23,19 @@ import java.util.concurrent.TimeUnit;
 @Named
 public class GirlServiceImpl implements GirlService {
 
-    @Queue("girlComing")
-    private Topic<Girl> girlComingTopic;
-
-    @Queue("girlGone")
-    private Topic<Girl> girlGoneTopic;
-
-    // step 3.7.1
-    @Queue("girlComing")
-    private TokenBasedTopic<NewGirlComing> newGirlComing;
-
-    @Inject
-    private Token token;
-
     private final ScheduledExecutorService scheduledExecutorService =
             ExecutorsHelper.newSingleThreadScheduledExecutor();
-
+    @Inject
+    @Queue("girlComing")
+    private Topic<Girl> girlComingTopic;
+    @Inject
+    @Queue("girlGone")
+    private Topic<Girl> girlGoneTopic;
+    @Inject
+    @Queue("girlComing")
+    private TokenBasedTopic<NewGirlComing> newGirlComing;
+    @Inject
+    private Token token;
     @Inject
     private GirlCopier girlCopier;
 
@@ -81,7 +79,7 @@ public class GirlServiceImpl implements GirlService {
     @Override
     public void deleteByName(String name) {
         // step 3.6
-        if(girlsMap.containsKey(name)) {
+        if (girlsMap.containsKey(name)) {
             Girl girl = girlsMap.get(name);
             girlsMap.remove(name);
             girlGoneTopic.publish(girl);
